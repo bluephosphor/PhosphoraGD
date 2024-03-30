@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://cmu77lhvfouj0"]
+
+[ext_resource type="Script" path="res://objects/water/water.gd" id="1_88ncl"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_baajp"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wu324"]
+transparency = 1
+albedo_color = Color(0, 0.666667, 1, 0.278431)
+
+[sub_resource type="BoxMesh" id="BoxMesh_acn6s"]
+
+[node name="Area3D" type="Area3D"]
+script = ExtResource("1_88ncl")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.5, 0.5)
+shape = SubResource("BoxShape3D_baajp")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.5, 0.5)
+material_override = SubResource("StandardMaterial3D_wu324")
+mesh = SubResource("BoxMesh_acn6s")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

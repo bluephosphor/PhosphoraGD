@@ -117,7 +117,8 @@ animations = [{
 
 [sub_resource type="SphereMesh" id="SphereMesh_0oqt0"]
 radial_segments = 16
-rings = 8
+rings = 1
+is_hemisphere = true
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_j04e8"]
 size = Vector3(1, 0.824707, 1)
@@ -160,6 +161,8 @@ shaded = true
 texture_filter = 0
 sprite_frames = SubResource("SpriteFrames_yn1ui")
 animation = &"walk"
+frame = 1
+frame_progress = 0.753963
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(-0.7, 1.25327e-08, 0, -1.05697e-07, -0.083, 0, 0, 0, 0.7, 0, -0.371171, 0)
@@ -182,7 +185,8 @@ current = true
 [node name="SpinParticles" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0107434, 0.0240233, -0.0049243)
 cast_shadow = 0
-amount = 32
+emitting = false
+amount = 64
 lifetime = 1.5
 process_material = SubResource("ParticleProcessMaterial_l4tdm")
 draw_pass_1 = SubResource("QuadMesh_r0j0k")

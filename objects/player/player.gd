@@ -18,7 +18,7 @@ var target_yrot = 0.0
 var current_yrot = 0.0
 
 # tracking the state
-var current_state = player_state_normal
+var current_state = state_normal
 var state_switch = true
 
 func _physics_process(delta):
@@ -41,7 +41,7 @@ func move_commit(delta, input_dir):
 		velocity.x = lerp(velocity.x, 0.0, frict * delta)
 		velocity.z = lerp(velocity.z, 0.0, frict * delta)
 
-func player_state_normal(delta):
+func state_normal(delta):
 	if state_switch:
 		state_switch = false
 		$AnimatedSprite3D.animation = "walk"
@@ -62,7 +62,7 @@ func player_state_normal(delta):
 
 	# handle spin
 	if Input.is_action_just_pressed("world_action"):
-		set_state(player_state_spin)
+		set_state(state_spin)
 	# flip sprite when moving left or right
 	if Input.is_action_just_pressed("ui_left"):
 		target_yrot = deg_to_rad(180)
@@ -88,7 +88,7 @@ func player_state_normal(delta):
 
 	move_commit(delta, input_dir)
 
-func player_state_spin(delta):
+func state_spin(delta):
 	if state_switch:
 		state_switch = false
 		$AnimatedSprite3D.animation = "spin"
@@ -117,10 +117,55 @@ func player_state_spin(delta):
 	if spin_time < max_spin_duration:
 		spin_time += delta
 	else:
-		set_state(player_state_normal)
+		$SpinParticles.emitting = false
+		set_state(state_normal)
 	
 	# Get the input direction and handle the movement/deceleration.
 	var input_dir = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
+
+	move_commit(delta, input_dir)
+	
+func state_swim_normal(delta):
+	if state_switch:
+		state_switch = false
+		$AnimatedSprite3D.animation = "walk"
+		velocity.y = 0
+		max_speed = 2
+		accel = 5
+		frict = 5
+		jump_velocity = 2
+		gravity = 5
+	
+	# Add the gravity.
+	if not is_on_floor():
+		velocity.y -= gravity * delta
+
+	# Handle vertical swim.
+	if Input.is_action_just_pressed("ui_accept"):
+		velocity.y = jump_velocity
+	
+	# Get the input direction 
+	var input_dir = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
+	
+	# flip sprite when moving left or right
+	if Input.is_action_just_pressed("ui_left"):
+		target_yrot = deg_to_rad(180)
+	elif Input.is_action_just_pressed("ui_right"):
+		target_yrot = 0.0
+	
+	# animation
+	if is_on_floor():
+		if input_dir:
+			$AnimatedSprite3D.play()
+		else:
+			$AnimatedSprite3D.set_frame_and_progress(0,0)
+			$AnimatedSprite3D.pause()
+	else:
+		if velocity.y > 0:
+			$AnimatedSprite3D.set_frame_and_progress(3,0)
+		else:
+			$AnimatedSprite3D.set_frame_and_progress(1,0)
+		$AnimatedSprite3D.pause()
 
 	move_commit(delta, input_dir)
 

@@ -33,11 +33,14 @@ data = PackedVector3Array(-32.0001, -0.4341, 0.4671, -32.0001, -5.4342, 0.4671, 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_4ip4o")
 
+[node name="Water" parent="." instance=ExtResource("5_tubso")]
+transform = Transform3D(16.6186, 0, 0, 0, 5.11951, 0, 0, 0, 9.03504, -32.6584, -6.596, -7.69824)
+
 [node name="Player" parent="." instance=ExtResource("1_o5ecm")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.130334, 0.67327, 2.31266)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.8697, 0.286235, -1.33723)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.448914, 0.893575, 0, -0.893575, 0.448914, 0, 7.45535, 0.0760605)
+transform = Transform3D(1, 0, 0, 0, 1.19249e-08, 1, 0, -1, 1.19249e-08, -1, 7.45535, 0.0760605)
 shadow_enabled = true
 
 [node name="Blocks" type="Node3D" parent="."]
@@ -75,6 +78,3 @@ mesh = ExtResource("4_qronx")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Map"]
 transform = Transform3D(1, 0, 0, 0, 1, 1.06581e-14, 0, -1.06581e-14, 1, 0, 0, 0)
 shape = SubResource("ConcavePolygonShape3D_s28xk")
-
-[node name="Area3D" parent="." instance=ExtResource("5_tubso")]
-transform = Transform3D(16.8252, 0, 0, 0, 5.11951, 0, 0, 0, 9.03504, -32.4495, -6.63261, -7.67317)

@@ -1,14 +1,20 @@
-[gd_scene load_steps=5 format=3 uid="uid://cmu77lhvfouj0"]
+[gd_scene load_steps=6 format=3 uid="uid://cmu77lhvfouj0"]
 
 [ext_resource type="Script" path="res://objects/water/water.gd" id="1_88ncl"]
+[ext_resource type="Shader" uid="uid://bs7w0pqlsysg6" path="res://objects/water/water.tres" id="2_likey"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_baajp"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wu324"]
-transparency = 1
-albedo_color = Color(0, 0.666667, 1, 0.278431)
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_d8kea"]
+render_priority = 0
+shader = ExtResource("2_likey")
+shader_parameter/ColorParameter = Color(0, 0.266667, 0.533333, 1)
 
-[sub_resource type="BoxMesh" id="BoxMesh_acn6s"]
+[sub_resource type="QuadMesh" id="QuadMesh_0655h"]
+material = SubResource("ShaderMaterial_d8kea")
+subdivide_width = 20
+subdivide_depth = 20
+orientation = 1
 
 [node name="Area3D" type="Area3D"]
 script = ExtResource("1_88ncl")
@@ -18,9 +24,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.5, 0.5)
 shape = SubResource("BoxShape3D_baajp")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.5, 0.5)
-material_override = SubResource("StandardMaterial3D_wu324")
-mesh = SubResource("BoxMesh_acn6s")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.499968, 1.00279, 0.49717)
+mesh = SubResource("QuadMesh_0655h")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]

@@ -158,6 +158,7 @@ script = ExtResource("1_nkhas")
 [node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
 pixel_size = 0.04
 shaded = true
+alpha_cut = 1
 texture_filter = 0
 sprite_frames = SubResource("SpriteFrames_yn1ui")
 animation = &"walk"

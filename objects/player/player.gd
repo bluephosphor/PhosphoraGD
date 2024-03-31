@@ -133,7 +133,7 @@ func state_swim_normal(delta):
 		max_speed = 2
 		accel = 5
 		frict = 5
-		jump_velocity = 2
+		jump_velocity = 3
 		gravity = 5
 	
 	# Add the gravity.
@@ -142,7 +142,7 @@ func state_swim_normal(delta):
 
 	# Handle vertical swim.
 	if Input.is_action_just_pressed("ui_accept"):
-		velocity.y = jump_velocity
+		velocity.y += jump_velocity
 	
 	# Get the input direction 
 	var input_dir = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
